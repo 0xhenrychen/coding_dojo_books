@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Books</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        h2 {
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            width: 800px;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <h2>Title: {{ book.title }}</h2>
+            <p>Favorited by:</p>
+            {% for favorite in favorites %}
+                <p>{{ favorite.author_name }}</p>
+            {% endfor %}
+            <p><a href="/authors">Home</a></p>
+        </div>
+        <div>
+            <h2>Add Book's Favorites</h2>
+            <form action="/add_author_favorite" method="POST">
+                <div>
+                    <label for="author_name">Name:</label>
+                    <input type="hidden" name="book_id" value={{ book.id }}>
+                    <select name="author_id">
+                        {% for author in authors %}
+                            <option value = {{ author.id }}>{{ author.author_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <input type="submit" value="Add">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
